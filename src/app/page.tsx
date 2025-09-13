@@ -1,103 +1,162 @@
-import Image from "next/image";
+"use client";
+import { LeaderboardEntry } from "@/components/LeaderboardEntry";
+import { useEffect, useState } from "react";
+
+interface LeaderboardData {
+	rank: number;
+	username: string;
+	score: number;
+	accuracy: number;
+	date: string;
+}
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+	const [entries, setEntries] = useState<LeaderboardData[]>([]);
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState<string | null>(null);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+	useEffect(() => {
+		fetch("/api/leaderboard")
+			.then((res) => {
+				if (!res.ok) {
+					throw new Error(`HTTP error! status: ${res.status}`);
+				}
+				return res.json();
+			})
+			.then((data) => {
+				setEntries(data);
+				setError(null);
+			})
+			.catch((err) => {
+				console.error("Fetch error:", err);
+				setError("Failed to load leaderboard data.");
+			})
+			.finally(() => {
+				setLoading(false);
+			});
+	}, []);
+
+	return (
+		<div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
+			<h1 className="font-extrabold text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl bg-gradient-to-tl from-neutral-600 to-neutral-300 bg-clip-text text-transparent text-center">
+				Leaderboard
+			</h1>
+			<div className="w-full max-w-4xl">
+				{loading && <p>Loading leaderboard...</p>}
+				{error && <p className="text-red-500">{error}</p>}
+				{!loading && !error && entries.length === 0 && (
+					<p>No entries found.</p>
+				)}
+				{!loading && !error && entries.length > 0 && (
+					<>
+						{entries.length >= 1 && (
+							<div className="mb-12">
+								<div className="flex justify-center items-end gap-6 mb-8">
+									{entries[1] && (
+										<div className="text-center flex flex-col items-center">
+											<div className="bg-gradient-to-b from-gray-300 to-gray-500 rounded-lg p-4 h-24 w-24 flex items-center justify-center mb-4">
+												<span className="text-2xl font-bold text-white">
+													2
+												</span>
+											</div>
+											<div className="border border-neutral-100 dark:border-neutral-800 rounded-lg p-4">
+												<p className="font-semibold">
+													{entries[1].username}
+												</p>
+												<p className="text-neutral-600 dark:text-neutral-400 text-sm">
+													{entries[1].score.toLocaleString()}{" "}
+													-{" "}
+													{entries[1].accuracy * 100}%
+												</p>
+											</div>
+										</div>
+									)}
+
+									{entries[0] && (
+										<div className="text-center flex flex-col items-center">
+											<div className="bg-gradient-to-b from-yellow-300 to-yellow-600 rounded-lg p-4 h-32 w-32 flex items-center justify-center mb-4">
+												<span className="text-3xl font-bold text-white">
+													1
+												</span>
+											</div>
+											<div className="border border-neutral-100 dark:border-neutral-800 rounded-lg p-4">
+												<p className="font-bold">
+													{entries[0].username}
+												</p>
+												<p className="text-neutral-600 dark:text-neutral-400 text-sm">
+													{entries[0].score.toLocaleString()}{" "}
+													-{" "}
+													{entries[0].accuracy * 100}%
+												</p>
+											</div>
+										</div>
+									)}
+
+									{entries[2] && (
+										<div className="text-center flex flex-col items-center">
+											<div className="bg-gradient-to-b from-orange-300 to-orange-600 rounded-lg p-4 h-20 w-20 flex items-center justify-center mb-4">
+												<span className="text-xl font-bold text-white">
+													3
+												</span>
+											</div>
+											<div className="border border-neutral-100 dark:border-neutral-800 rounded-lg p-4">
+												<p className="font-semibold">
+													{entries[2].username}
+												</p>
+												<p className="text-neutral-600 dark:text-neutral-400 text-sm">
+													{entries[2].score.toLocaleString()}{" "}
+													-{" "}
+													{entries[2].accuracy * 100}%
+												</p>
+											</div>
+										</div>
+									)}
+								</div>
+							</div>
+						)}
+
+						<h2 className="font-bold text-center mb-2">
+							All players
+						</h2>
+
+						<div className="border border-neutral-100 dark:border-neutral-800 rounded-lg overflow-hidden">
+							<table className="w-full border-collapse">
+								<thead>
+									<tr className="bg-neutral-100 dark:bg-neutral-800">
+										<th className="border-r border-neutral-100 dark:border-neutral-800 px-4 py-2 first:border-l-0 last:border-r-0">
+											Rank
+										</th>
+										<th className="border-r border-neutral-100 dark:border-neutral-800 px-4 py-2 last:border-r-0">
+											Username
+										</th>
+										<th className="border-r border-neutral-100 dark:border-neutral-800 px-4 py-2 last:border-r-0">
+											Score
+										</th>
+										<th className="border-r border-neutral-100 dark:border-neutral-800 px-4 py-2 last:border-r-0">
+											Accuracy
+										</th>
+										<th className="border-r border-neutral-100 dark:border-neutral-800 px-4 py-2 last:border-r-0">
+											Date
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									{entries.map((entry, index) => (
+										<LeaderboardEntry
+											score={entry.score}
+											rank={entry.rank}
+											username={entry.username}
+											accuracy={entry.accuracy}
+											date={entry.date}
+											key={index}
+										/>
+									))}
+								</tbody>
+							</table>
+						</div>
+					</>
+				)}
+			</div>
+		</div>
+	);
 }
