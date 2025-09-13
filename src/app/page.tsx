@@ -42,7 +42,9 @@ export default function Home() {
 				Leaderboard
 			</h1>
 			<div className="w-full max-w-4xl">
-				{loading && <p>Loading leaderboard...</p>}
+				{loading && (
+					<p className="text-center">Loading leaderboard...</p>
+				)}
 				{error && <p className="text-red-500">{error}</p>}
 				{!loading && !error && entries.length === 0 && (
 					<p>No entries found.</p>
