@@ -1,36 +1,125 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Shoot 'Em All Leaderboard
+
+A comprehensive web application for the Shoot 'Em All aim trainer game, featuring global leaderboards, game statistics, and an integrated gameplay experience.
+
+## Overview
+
+This project provides a complete ecosystem for the Shoot 'Em All game, including:
+
+-   **Leaderboard System**: Global rankings with player scores, accuracy, and timestamps
+-   **Game Integration**: Embedded gameplay with fullscreen support and game controls
+-   **Statistics API**: Real-time game statistics and player data
+
+## Features
+
+### 🎯 Game Features
+
+-   60-second aim training sessions
+-   Precision-based scoring system
+-   Real-time accuracy tracking
+-   Embedded game with reload and fullscreen controls
+
+### 📊 Leaderboard
+
+-   Global player rankings sorted by score and accuracy
+-   Top 3 podium display with visual rankings
+-   Complete player statistics including dates
+-   Real-time data updates
+
+### 📈 Statistics
+
+-   Total player count
+-   Best accuracy achieved
+-   Current high score
+-   Live game statistics
+
+## Technology Stack
+
+-   **Framework**: Next.js 15 with App Router
+-   **Language**: TypeScript
+-   **Styling**: Tailwind CSS v4
+-   **Deployment**: Vercel
+-   **Database**: MongoDB (via external API)
+
+## Project Structure
+
+```
+src/
+├── app/
+│   ├── api/
+│   │   ├── leaderboard/route.ts    # Leaderboard API endpoint
+│   │   └── stats/route.ts          # Statistics API endpoint
+│   ├── leaderboard/page.tsx        # Leaderboard page
+│   ├── play/page.tsx               # Game page
+│   ├── privacy-policy/page.tsx     # Privacy policy
+│   ├── layout.tsx                  # Root layout
+│   ├── page.tsx                    # Home page
+│   └── globals.css                 # Global styles
+└── components/
+    ├── LeaderboardEntry.tsx        # Individual leaderboard row
+    └── Footer.tsx                  # Site footer
+```
+
+## API Endpoints
+
+### Internal API Routes
+
+-   `GET /api/leaderboard` - Fetches and formats leaderboard data
+-   `GET /api/stats` - Retrieves game statistics
+
+### External API Integration
+
+The application integrates with `https://api.sea.xvcf.dev` for:
+
+-   Player leaderboard data
+-   Game statistics
+-   Real-time updates
 
 ## Getting Started
 
-First, run the development server:
+1. **Clone the repository**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+    ```bash
+    git clone https://github.com/RafaeloxMC/sea-leaderboard.git
+    cd sea-leaderboard
+    ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Install dependencies**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+    ```bash
+    npm install
+    ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. **Run the development server**
 
-## Learn More
+    ```bash
+    npm run dev
+    ```
 
-To learn more about Next.js, take a look at the following resources:
+4. **Open your browser**
+   Navigate to [http://localhost:3000](http://localhost:3000)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Available Scripts
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+-   `npm run dev` - Start development server
+-   `npm run build` - Build for production
+-   `npm run start` - Start production server
+-   `npm run lint` - Run ESLint
 
-## Deploy on Vercel
+## Data Privacy
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The application collects minimal data:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+-   Game scores and accuracy
+-   Anonymized player names
+-   Game session timestamps
+
+No personal information, IP addresses, or tracking cookies are stored. See the [privacy policy](src/app/privacy-policy/page.tsx) for complete details.
+
+## Contributing
+
+This project follows standard Next.js development practices. Feel free to submit issues or pull requests.
+
+## License
+
+Private project - All rights reserved.
