@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
+import Footer from "@/components/Footer";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -38,7 +39,7 @@ export default function RootLayout({
 						</Link>
 						<div className="flex flex-row gap-4">
 							<Link
-								href="https://game.sea.xvcf.dev/"
+								href="/play"
 								className="px-6 py-3 border border-neutral-200 dark:border-neutral-800 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-colors duration-200 font-medium"
 							>
 								Play
@@ -53,11 +54,7 @@ export default function RootLayout({
 					</nav>
 				</header>
 				{children}
-				<footer className="border-t border-neutral-200 dark:border-neutral-800 p-8 text-center">
-					<p className="text-neutral-600 dark:text-neutral-400">
-						&copy; {new Date().getFullYear()} - Built by xvcf
-					</p>
-				</footer>
+				<Footer />
 			</body>
 		</html>
 	);

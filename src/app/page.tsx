@@ -41,7 +41,7 @@ function Home() {
 							View Leaderboard
 						</Link>
 						<Link
-							href="https://game.sea.xvcf.dev/"
+							href="/play"
 							className="px-8 py-4 border border-neutral-200 dark:border-neutral-800 rounded-lg text-lg font-semibold hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-colors duration-200"
 						>
 							Play
