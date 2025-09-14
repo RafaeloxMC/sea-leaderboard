@@ -4,28 +4,6 @@ import React from "react";
 function Home() {
 	return (
 		<div className="font-sans min-h-screen bg-white dark:bg-black text-black dark:text-white">
-			<header className="p-8 sm:p-20">
-				<nav className="flex justify-between items-center max-w-6xl mx-auto">
-					<div className="text-2xl font-bold bg-gradient-to-tl from-neutral-600 to-neutral-300 bg-clip-text text-transparent">
-						SEA
-					</div>
-					<div className="flex flex-row gap-4">
-						<Link
-							href="https://game.sea.xvcf.dev/"
-							className="px-6 py-3 border border-neutral-200 dark:border-neutral-800 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-colors duration-200 font-medium"
-						>
-							Play Game
-						</Link>
-						<Link
-							href="/leaderboard"
-							className="px-6 py-3 border border-neutral-200 dark:border-neutral-800 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-colors duration-200 font-medium"
-						>
-							View Leaderboard
-						</Link>
-					</div>
-				</nav>
-			</header>
-
 			<main className="px-8 sm:px-20 pb-20">
 				<div className="max-w-6xl mx-auto">
 					<div className="text-center mb-16">
@@ -127,12 +105,6 @@ function Home() {
 					</div>
 				</div>
 			</main>
-
-			<footer className="border-t border-neutral-200 dark:border-neutral-800 p-8 text-center">
-				<p className="text-neutral-600 dark:text-neutral-400">
-					&copy; {new Date().getFullYear()} - Built by xvcf
-				</p>
-			</footer>
 		</div>
 	);
 }
