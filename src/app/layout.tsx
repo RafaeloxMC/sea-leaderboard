@@ -41,7 +41,7 @@ export default function RootLayout({
 								href="https://game.sea.xvcf.dev/"
 								className="px-6 py-3 border border-neutral-200 dark:border-neutral-800 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-colors duration-200 font-medium"
 							>
-								Play Game
+								Play
 							</Link>
 							<Link
 								href="/leaderboard"
