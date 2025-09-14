@@ -1,7 +1,23 @@
+"use client";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 function Home() {
+	const [totalPlayers, setTotalPlayers] = useState(0);
+	const [bestAccuracy, setBestAccuracy] = useState(0);
+	const [highScore, setHighScore] = useState(0);
+
+	useEffect(() => {
+		fetch("/api/stats").then(async (res) => {
+			const json = await res.json();
+			if (res.status == 200) {
+				setTotalPlayers(json.size);
+				setBestAccuracy(json.best_accuracy.accuracy * 100);
+				setHighScore(json.high_score.score);
+			}
+		});
+	}, []);
+
 	return (
 		<div className="font-sans min-h-screen bg-white dark:bg-black text-black dark:text-white">
 			<main className="px-8 sm:px-20 pb-20">
@@ -71,7 +87,7 @@ function Home() {
 						<div className="grid grid-cols-2 md:grid-cols-4 gap-8">
 							<div>
 								<div className="text-3xl sm:text-4xl font-bold text-neutral-600 dark:text-neutral-400 mb-2">
-									1,247
+									{totalPlayers.toString() ?? "0"}
 								</div>
 								<div className="text-sm text-neutral-500">
 									Total Players
@@ -79,7 +95,7 @@ function Home() {
 							</div>
 							<div>
 								<div className="text-3xl sm:text-4xl font-bold text-neutral-600 dark:text-neutral-400 mb-2">
-									98.5%
+									{bestAccuracy.toFixed(2) ?? "0"}%
 								</div>
 								<div className="text-sm text-neutral-500">
 									Best Accuracy
@@ -87,7 +103,7 @@ function Home() {
 							</div>
 							<div>
 								<div className="text-3xl sm:text-4xl font-bold text-neutral-600 dark:text-neutral-400 mb-2">
-									15,432
+									{highScore.toString() ?? "0"}
 								</div>
 								<div className="text-sm text-neutral-500">
 									High Score
