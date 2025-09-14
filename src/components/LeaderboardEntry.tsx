@@ -25,7 +25,7 @@ export const LeaderboardEntry = ({
 				{score}
 			</td>
 			<td className="p-4 border-neutral-200 dark:border-r-neutral-800 border-r-2">
-				{accuracy * 100}%
+				{(accuracy * 100).toFixed(2)}%
 			</td>
 			<td className="p-4 border-neutral-200 dark:border-r-neutral-800 border-r-0">
 				{new Date(date).toLocaleDateString()}

@@ -68,7 +68,11 @@ export default function Home() {
 												<p className="text-neutral-600 dark:text-neutral-400 text-sm">
 													{entries[1].score.toLocaleString()}{" "}
 													-{" "}
-													{entries[1].accuracy * 100}%
+													{(
+														entries[1].accuracy *
+														100
+													).toFixed(2)}
+													%
 												</p>
 											</div>
 										</div>
@@ -88,7 +92,11 @@ export default function Home() {
 												<p className="text-neutral-600 dark:text-neutral-400 text-sm">
 													{entries[0].score.toLocaleString()}{" "}
 													-{" "}
-													{entries[0].accuracy * 100}%
+													{(
+														entries[0].accuracy *
+														100
+													).toFixed(2)}
+													%
 												</p>
 											</div>
 										</div>
@@ -108,7 +116,11 @@ export default function Home() {
 												<p className="text-neutral-600 dark:text-neutral-400 text-sm">
 													{entries[2].score.toLocaleString()}{" "}
 													-{" "}
-													{entries[2].accuracy * 100}%
+													{(
+														entries[2].accuracy *
+														100
+													).toFixed(2)}
+													%
 												</p>
 											</div>
 										</div>
