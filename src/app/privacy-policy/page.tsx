@@ -15,12 +15,20 @@ function PrivacyPolicy() {
 							who has access to it.
 						</p>
 						<br />
+						<a
+							className="hover:cursor-pointer hover:underline"
+							href="https://github.com/RafaeloxMC/sea-leaderboard/commits/main/src/app/privacy-policy/page.tsx"
+						>
+							Find previous versions here!
+						</a>
+						<br />
+						<br />
 						<p>
 							In the following the terms &quot;SEA&quot;,
-							&quot;Shoot &apos;Em All&quot; &quot;Shoot Em
-							All&quot; and &quot;the service&quot; refer to this
-							website. The term &quot;the developer&quot; refers
-							to xvcf. For contact, please visit:
+							&quot;Shoot &apos;Em All&quot; and &quot;the
+							service&quot; refer to this website. The term
+							&quot;the developer&quot; refers to xvcf. For
+							contact, please visit:
 							<br />
 							<a
 								className="hover:cursor-pointer hover:underline"
