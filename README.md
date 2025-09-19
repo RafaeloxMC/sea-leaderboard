@@ -10,6 +10,8 @@ This project provides a complete ecosystem for the Shoot 'Em All game, including
 -   **Game Integration**: Embedded gameplay with fullscreen support and game controls
 -   **Statistics API**: Real-time game statistics and player data
 
+The game is located at [RafaeloxMC/shoot--em-all](https://github.com/RafaeloxMC/shoot--em-all)
+
 ## Features
 
 ### 🎯 Game Features
@@ -61,6 +63,8 @@ src/
 ```
 
 ## API Endpoints
+
+Find the API at: [RafaeloxMC/sea-api](https://github.com/RafaeloxMC/sea-api)
 
 ### Internal API Routes
 
